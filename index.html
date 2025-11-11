@@ -331,6 +331,7 @@
         .photo-viewer {
             text-align: center;
             padding: 15px;
+            position: relative;
         }
         
         .full-photo {
@@ -339,6 +340,7 @@
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             object-fit: contain;
+            transition: transform 0.3s ease;
         }
         
         .photo-info {
@@ -347,6 +349,43 @@
             background: #f8f9fa;
             border-radius: 10px;
             text-align: left;
+        }
+        
+        .photo-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+        
+        .nav-button {
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-button:hover {
+            background: rgba(0, 0, 0, 0.9);
+            transform: scale(1.1);
+        }
+        
+        .nav-button:active {
+            transform: scale(0.95);
+        }
+        
+        .photo-counter {
+            font-size: 14px;
+            color: #666;
+            font-weight: 500;
         }
         
         .calculator {
@@ -681,6 +720,24 @@
             border-radius: 5px;
         }
         
+        .xp-theme .photo-navigation {
+            margin-top: 10px;
+        }
+        
+        .xp-theme .nav-button {
+            background: #316AC5;
+            border: 1px outset #ece9d8;
+            color: white;
+        }
+        
+        .xp-theme .nav-button:active {
+            border: 1px inset #ece9d8;
+        }
+        
+        .xp-theme .photo-counter {
+            color: #000;
+        }
+        
         .xp-theme .calculator {
             gap: 8px;
         }
@@ -1013,6 +1070,30 @@
             box-shadow: 0 0 15px rgba(93, 155, 255, 0.2);
         }
         
+        .future-theme .photo-navigation {
+            margin-top: 15px;
+        }
+        
+        .future-theme .nav-button {
+            background: rgba(93, 155, 255, 0.7);
+            border: 1px solid rgba(93, 155, 255, 0.5);
+            color: #e0e0e0;
+        }
+        
+        .future-theme .nav-button:hover {
+            background: rgba(93, 155, 255, 0.9);
+            box-shadow: 0 0 10px rgba(93, 155, 255, 0.5);
+        }
+        
+        .future-theme .nav-button:active {
+            background: rgba(93, 155, 255, 0.5);
+            border: 1px inset rgba(93, 155, 255, 0.7);
+        }
+        
+        .future-theme .photo-counter {
+            color: #5d9bff;
+        }
+        
         .future-theme .calculator {
             gap: 10px;
         }
@@ -1247,6 +1328,20 @@
                 max-height: 50vh;
             }
             
+            .photo-navigation {
+                margin-top: 10px;
+            }
+            
+            .nav-button {
+                width: 36px;
+                height: 36px;
+                font-size: 16px;
+            }
+            
+            .photo-counter {
+                font-size: 13px;
+            }
+            
             .calculator {
                 gap: 10px;
             }
@@ -1455,6 +1550,20 @@
                 font-size: 14px;
             }
             
+            .photo-navigation {
+                margin-top: 8px;
+            }
+            
+            .nav-button {
+                width: 34px;
+                height: 34px;
+                font-size: 15px;
+            }
+            
+            .photo-counter {
+                font-size: 12px;
+            }
+            
             .calculator {
                 gap: 8px;
             }
@@ -1595,6 +1704,16 @@
             
             .folder-content, .photo-gallery {
                 grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            }
+            
+            .photo-navigation {
+                margin-top: 5px;
+            }
+            
+            .nav-button {
+                width: 32px;
+                height: 32px;
+                font-size: 14px;
             }
             
             .xp-theme .icon {
@@ -1960,6 +2079,11 @@
             <div class="window-content">
                 <div class="photo-viewer">
                     <img id="modern-full-photo" src="" class="full-photo">
+                    <div class="photo-navigation">
+                        <button class="nav-button prev-button" onclick="prevPhoto('modern')">‹</button>
+                        <span class="photo-counter" id="modern-photo-counter">1/1</span>
+                        <button class="nav-button next-button" onclick="nextPhoto('modern')">›</button>
+                    </div>
                     <div class="photo-info">
                         <h3 id="modern-photo-name">Название фото</h3>
                         <p id="modern-photo-description">Описание фотографии</p>
@@ -2238,6 +2362,11 @@
             <div class="window-content">
                 <div class="photo-viewer">
                     <img id="xp-full-photo" src="" class="full-photo">
+                    <div class="photo-navigation">
+                        <button class="nav-button prev-button" onclick="prevPhoto('xp')">‹</button>
+                        <span class="photo-counter" id="xp-photo-counter">1/1</span>
+                        <button class="nav-button next-button" onclick="nextPhoto('xp')">›</button>
+                    </div>
                     <div class="photo-info">
                         <h3 id="xp-photo-name">Название фото</h3>
                         <p id="xp-photo-description">Описание фотографии</p>
@@ -2512,6 +2641,11 @@
             <div class="window-content">
                 <div class="photo-viewer">
                     <img id="future-full-photo" src="" class="full-photo">
+                    <div class="photo-navigation">
+                        <button class="nav-button prev-button" onclick="prevPhoto('future')">‹</button>
+                        <span class="photo-counter" id="future-photo-counter">1/1</span>
+                        <button class="nav-button next-button" onclick="nextPhoto('future')">›</button>
+                    </div>
                     <div class="photo-info">
                         <h3 id="future-photo-name">Название голопроекции</h3>
                         <p id="future-photo-description">Описание голографической проекции</p>
@@ -2552,6 +2686,22 @@
             }
         };
         const openWindows = {};
+        
+        // Объект для хранения текущего состояния просмотра фотографий для каждой темы
+        const photoViewerState = {
+            modern: {
+                currentPhotoIndex: 0,
+                currentAlbum: []
+            },
+            xp: {
+                currentPhotoIndex: 0,
+                currentAlbum: []
+            },
+            future: {
+                currentPhotoIndex: 0,
+                currentAlbum: []
+            }
+        };
         
         // Функция для проверки мобильного устройства
         function isMobileDevice() {
@@ -2756,6 +2906,7 @@
             });
         } 
         
+        // Обновленная функция для открытия просмотра фотографий
         function openPhotoViewer(photoSrc, photoName, description, theme) {
             const viewerId = `${theme}-photo-viewer`;
             const viewer = document.getElementById(viewerId);
@@ -2763,36 +2914,43 @@
                 console.warn(`Photo viewer with ID ${viewerId} not found.`);
                 return;
             }
-            const fullPhoto = document.getElementById(`${theme}-full-photo`);
-            const photoTitle = document.getElementById(`${theme}-photo-viewer-title`);
-            const photoNameElement = document.getElementById(`${theme}-photo-name`);
-            const photoDescription = document.getElementById(`${theme}-photo-description`);
-            const photoSize = document.getElementById(`${theme}-photo-size`);
-            const photoRatio = document.getElementById(`${theme}-photo-ratio`);
-            if (!fullPhoto) return;
-            fullPhoto.src = photoSrc;
-            photoTitle.textContent = photoName;
-            photoNameElement.textContent = photoName;
-            photoDescription.textContent = description;
-            let sizes;
-            if (theme === 'future') {
-                sizes = [
-                    {size: "8K Holographic", ratio: "Квантовая визуализация"},
-                    {size: "16K Neural", ratio: "Нейросетевое улучшение"},
-                    {size: "Quantum HD", ratio: "Квантовая графика"}
-                ];
-            } else {
-                sizes = [
-                    {size: "1920x1080", ratio: "16:9"},
-                    {size: "1200x800", ratio: "3:2"},
-                    {size: "1080x1350", ratio: "4:5"},
-                    {size: "800x1200", ratio: "2:3"}
-                ];
-            }
-            const randomSize = sizes[Math.floor(Math.random() * sizes.length)];
-            photoSize.textContent = randomSize.size;
-            photoRatio.textContent = randomSize.ratio;
             
+            // Получаем текущий альбом (все фотографии в текущей галерее)
+            const currentGallery = document.querySelector(`#${theme}-${getCurrentGallery(theme)} .photo-gallery`);
+            let album = [];
+            
+            if (currentGallery) {
+                const photoItems = currentGallery.querySelectorAll('.photo-item');
+                photoItems.forEach(item => {
+                    const img = item.querySelector('img');
+                    const title = item.querySelector('.photo-title');
+                    if (img && title) {
+                        album.push({
+                            src: img.src,
+                            name: title.textContent,
+                            description: item.getAttribute('onclick').split("'")[7] || 'Описание отсутствует'
+                        });
+                    }
+                });
+            }
+            
+            // Находим индекс текущей фотографии в альбоме
+            let currentIndex = 0;
+            for (let i = 0; i < album.length; i++) {
+                if (album[i].src === photoSrc) {
+                    currentIndex = i;
+                    break;
+                }
+            }
+            
+            // Сохраняем состояние для данной темы
+            photoViewerState[theme].currentAlbum = album;
+            photoViewerState[theme].currentPhotoIndex = currentIndex;
+            
+            // Отображаем фотографию
+            showPhoto(theme);
+            
+            // Открываем окно просмотра
             viewer.classList.add('active');
             bringWindowToFront(viewer);
             
@@ -2832,6 +2990,134 @@
                 openWindows[viewerId] = appButton;
             }
             appButton.classList.add('current-app');
+        }
+        
+        // Функция для определения текущей галереи
+        function getCurrentGallery(theme) {
+            // Простая логика определения текущей галереи
+            // В реальном приложении нужно отслеживать, какое окно было открыто последним
+            if (theme === 'modern') return 'city';
+            if (theme === 'xp') return 'portraits';
+            if (theme === 'future') return 'portraits';
+            return 'city';
+        }
+        
+        // Функция для отображения текущей фотографии
+        function showPhoto(theme) {
+            const state = photoViewerState[theme];
+            const album = state.currentAlbum;
+            const currentIndex = state.currentPhotoIndex;
+            
+            if (album.length === 0) return;
+            
+            const photo = album[currentIndex];
+            const fullPhoto = document.getElementById(`${theme}-full-photo`);
+            const photoTitle = document.getElementById(`${theme}-photo-viewer-title`);
+            const photoNameElement = document.getElementById(`${theme}-photo-name`);
+            const photoDescription = document.getElementById(`${theme}-photo-description`);
+            const photoSize = document.getElementById(`${theme}-photo-size`);
+            const photoRatio = document.getElementById(`${theme}-photo-ratio`);
+            const photoCounter = document.getElementById(`${theme}-photo-counter`);
+            
+            if (fullPhoto) fullPhoto.src = photo.src;
+            if (photoTitle) photoTitle.textContent = photo.name;
+            if (photoNameElement) photoNameElement.textContent = photo.name;
+            if (photoDescription) photoDescription.textContent = photo.description;
+            
+            let sizes;
+            if (theme === 'future') {
+                sizes = [
+                    {size: "8K Holographic", ratio: "Квантовая визуализация"},
+                    {size: "16K Neural", ratio: "Нейросетевое улучшение"},
+                    {size: "Quantum HD", ratio: "Квантовая графика"}
+                ];
+            } else {
+                sizes = [
+                    {size: "1920x1080", ratio: "16:9"},
+                    {size: "1200x800", ratio: "3:2"},
+                    {size: "1080x1350", ratio: "4:5"},
+                    {size: "800x1200", ratio: "2:3"}
+                ];
+            }
+            const randomSize = sizes[Math.floor(Math.random() * sizes.length)];
+            if (photoSize) photoSize.textContent = randomSize.size;
+            if (photoRatio) photoRatio.textContent = randomSize.ratio;
+            
+            if (photoCounter) {
+                photoCounter.textContent = `${currentIndex + 1}/${album.length}`;
+            }
+            
+            // Добавляем обработчики свайпов для мобильных устройств
+            if (isMobileDevice() && fullPhoto) {
+                addSwipeHandlers(fullPhoto, theme);
+            }
+        }
+        
+        // Функция для перехода к следующей фотографии
+        function nextPhoto(theme) {
+            const state = photoViewerState[theme];
+            if (state.currentPhotoIndex < state.currentAlbum.length - 1) {
+                state.currentPhotoIndex++;
+                showPhoto(theme);
+            }
+        }
+        
+        // Функция для перехода к предыдущей фотографии
+        function prevPhoto(theme) {
+            const state = photoViewerState[theme];
+            if (state.currentPhotoIndex > 0) {
+                state.currentPhotoIndex--;
+                showPhoto(theme);
+            }
+        }
+        
+        // Функция для добавления обработчиков свайпов
+        function addSwipeHandlers(element, theme) {
+            let startX, startY, endX, endY;
+            
+            element.ontouchstart = function(e) {
+                startX = e.touches[0].clientX;
+                startY = e.touches[0].clientY;
+            };
+            
+            element.ontouchmove = function(e) {
+                endX = e.touches[0].clientX;
+                endY = e.touches[0].clientY;
+            };
+            
+            element.ontouchend = function(e) {
+                if (!startX || !startY || !endX || !endY) return;
+                
+                const diffX = startX - endX;
+                const diffY = startY - endY;
+                
+                // Определяем направление свайпа
+                if (Math.abs(diffX) > Math.abs(diffY)) {
+                    // Горизонтальный свайп
+                    if (diffX > 0) {
+                        // Свайп влево - следующая фотография
+                        nextPhoto(theme);
+                    } else {
+                        // Свайп вправо - предыдущая фотография
+                        prevPhoto(theme);
+                    }
+                } else {
+                    // Вертикальный свайп
+                    if (diffY > 0) {
+                        // Свайп вверх - следующая фотография
+                        nextPhoto(theme);
+                    } else {
+                        // Свайп вниз - предыдущая фотография
+                        prevPhoto(theme);
+                    }
+                }
+                
+                // Сбрасываем значения
+                startX = null;
+                startY = null;
+                endX = null;
+                endY = null;
+            };
         }
         
         function updateDisplay(theme) {
@@ -3076,6 +3362,17 @@
             });
             
             document.querySelectorAll('#time-machine-modal button').forEach(button => {
+                const originalOnClick = button.getAttribute('onclick');
+                if (originalOnClick) {
+                    button.ontouchstart = function(e) {
+                        e.preventDefault();
+                        eval(originalOnClick);
+                    };
+                }
+            });
+            
+            // Добавляем обработчики для кнопок навигации по фотографиям
+            document.querySelectorAll('.nav-button').forEach(button => {
                 const originalOnClick = button.getAttribute('onclick');
                 if (originalOnClick) {
                     button.ontouchstart = function(e) {
